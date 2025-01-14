@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poetry Sharing Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 2rem;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .poem {
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+        }
+        .poem h3 {
+            margin: 0;
+            color: #4CAF50;
+        }
+        .poem p {
+            margin: 0.5rem 0 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Poetry Sharing Platform</h1>
+        <p>Share your thoughts and creativity!</p>
+    </header>
+    <main>
+        <form id="poemForm">
+            <input type="text" id="poetName" placeholder="Your Name" required>
+            <textarea id="poemText" rows="5" placeholder="Write your poem here..." required></textarea>
+            <button type="submit">Submit Poem</button>
+        </form>
+        <section id="poemList">
+            <h2>Shared Poems</h2>
+        </section>
+    </main>
+    <script>
+        const poemList = JSON.parse(localStorage.getItem('poems')) || [];
+
+        function displayPoems() {
+            const poemListContainer = document.getElementById('poemList');
+            poemListContainer.innerHTML = '<h2>Shared Poems</h2>';
+            poemList.forEach((poem, index) => {
+                const poemDiv = document.createElement('div');
+                poemDiv.classList.add('poem');
+                poemDiv.innerHTML = `
+                    <h3>${poem.name || 'Anonymous'}</h3>
+                    <p>${poem.text}</p>
+                `;
+                poemListContainer.appendChild(poemDiv);
+            });
+        }
+
+        function submitPoem(event) {
+            event.preventDefault();
+            const poetName = document.getElementById('poetName').value.trim();
+            const poemText = document.getElementById('poemText').value.trim();
+
+            const newPoem = { name: poetName, text: poemText };
+            poemList.push(newPoem);
+            localStorage.setItem('poems', JSON.stringify(poemList));
+
+            displayPoems();
+            document.getElementById('poemForm').reset();
+        }
+
+        document.getElementById('poemForm').addEventListener('submit', submitPoem);
+        displayPoems();
+    </script>
+</body>
+</html>
