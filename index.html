@@ -49,6 +49,7 @@
             margin-bottom: 1rem;
             border-radius: 5px;
             background-color: #fefefe;
+            position: relative;
         }
         .poem h3 {
             margin: 0;
@@ -62,6 +63,21 @@
         .poem p {
             margin: 0.5rem 0 0;
             color: #555;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .delete-btn:hover {
+            background-color: darkred;
         }
     </style>
 </head>
@@ -82,7 +98,7 @@
         </section>
     </main>
     <script>
-        const poemList = JSON.parse(localStorage.getItem('poems')) || [];
+        let poemList = JSON.parse(localStorage.getItem('poems')) || [];
 
         function displayPoems() {
             const poemListContainer = document.getElementById('poemList');
@@ -94,6 +110,7 @@
                     <h3>${poem.name || 'Anonymous'}</h3>
                     <h4>${poem.title || 'Untitled'}</h4>
                     <p>${poem.text}</p>
+                    <button class="delete-btn" onclick="deletePoem(${index})">Delete</button>
                 `;
                 poemListContainer.appendChild(poemDiv);
             });
@@ -111,6 +128,12 @@
 
             displayPoems();
             document.getElementById('poemForm').reset();
+        }
+
+        function deletePoem(index) {
+            poemList.splice(index, 1);
+            localStorage.setItem('poems', JSON.stringify(poemList));
+            displayPoems();
         }
 
         document.getElementById('poemForm').addEventListener('submit', submitPoem);
