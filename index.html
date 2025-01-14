@@ -44,15 +44,24 @@
             background-color: #45a049;
         }
         .poem {
-            border-bottom: 1px solid #ddd;
-            padding: 1rem 0;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background-color: #fefefe;
         }
         .poem h3 {
             margin: 0;
             color: #4CAF50;
         }
+        .poem h4 {
+            margin: 0.5rem 0;
+            font-style: italic;
+            color: #333;
+        }
         .poem p {
             margin: 0.5rem 0 0;
+            color: #555;
         }
     </style>
 </head>
@@ -64,6 +73,7 @@
     <main>
         <form id="poemForm">
             <input type="text" id="poetName" placeholder="Your Name" required>
+            <input type="text" id="poemTitle" placeholder="Poem Title" required>
             <textarea id="poemText" rows="5" placeholder="Write your poem here..." required></textarea>
             <button type="submit">Submit Poem</button>
         </form>
@@ -82,6 +92,7 @@
                 poemDiv.classList.add('poem');
                 poemDiv.innerHTML = `
                     <h3>${poem.name || 'Anonymous'}</h3>
+                    <h4>${poem.title || 'Untitled'}</h4>
                     <p>${poem.text}</p>
                 `;
                 poemListContainer.appendChild(poemDiv);
@@ -91,9 +102,10 @@
         function submitPoem(event) {
             event.preventDefault();
             const poetName = document.getElementById('poetName').value.trim();
+            const poemTitle = document.getElementById('poemTitle').value.trim();
             const poemText = document.getElementById('poemText').value.trim();
 
-            const newPoem = { name: poetName, text: poemText };
+            const newPoem = { name: poetName, title: poemTitle, text: poemText };
             poemList.push(newPoem);
             localStorage.setItem('poems', JSON.stringify(poemList));
 
