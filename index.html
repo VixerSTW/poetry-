@@ -9,19 +9,21 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #E3FDFD; /* Light Blue */
+            color: #555;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #71C9CE; /* Dark Cyan */
             color: white;
             text-align: center;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
         }
         main {
             max-width: 800px;
             margin: 2rem auto;
             padding: 1rem;
-            background: white;
+            background: #CBF1F5; /* Light Cyan */
+            border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         form {
@@ -31,44 +33,49 @@
             width: 100%;
             padding: 0.8rem;
             margin-bottom: 1rem;
-            border: 1px solid #ccc;
+            border: 1px solid #71C9CE; /* Dark Cyan */
             border-radius: 5px;
         }
+        form input, form textarea {
+            background-color: #E3FDFD; /* Light Blue */
+            color: #555;
+        }
         form button {
-            background-color: #4CAF50;
+            background-color: #A6E3E9; /* Cyan */
             color: white;
             border: none;
             cursor: pointer;
+            font-size: 1rem;
         }
         form button:hover {
-            background-color: #45a049;
+            background-color: #71C9CE; /* Dark Cyan */
         }
         .poem {
-            border: 1px solid #ddd;
+            border: 1px solid #A6E3E9; /* Cyan */
             padding: 1rem;
             margin-bottom: 1rem;
             border-radius: 5px;
-            background-color: #fefefe;
+            background-color: #E3FDFD; /* Light Blue */
             position: relative;
         }
         .poem h3 {
             margin: 0;
-            color: #4CAF50;
+            color: #71C9CE; /* Dark Cyan */
         }
         .poem h4 {
             margin: 0.5rem 0;
             font-style: italic;
-            color: #333;
+            color: #555;
         }
         .poem p {
             margin: 0.5rem 0 0;
-            color: #555;
+            color: #333;
         }
         .delete-btn {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: red;
+            background-color: #71C9CE; /* Dark Cyan */
             color: white;
             border: none;
             border-radius: 5px;
@@ -77,7 +84,10 @@
             font-size: 0.8rem;
         }
         .delete-btn:hover {
-            background-color: darkred;
+            background-color: #A6E3E9; /* Cyan */
+        }
+        #poemList h2 {
+            color: #71C9CE; /* Dark Cyan */
         }
     </style>
 </head>
