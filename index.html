@@ -91,6 +91,7 @@
             <input type="text" id="poetName" placeholder="Your Name" required>
             <input type="text" id="poemTitle" placeholder="Poem Title" required>
             <textarea id="poemText" rows="5" placeholder="Write your poem here..." required></textarea>
+            <input type="password" id="poemCode" placeholder="Enter a secret code (e.g., 1234)" required>
             <button type="submit">Submit Poem</button>
         </form>
         <section id="poemList">
@@ -121,8 +122,9 @@
             const poetName = document.getElementById('poetName').value.trim();
             const poemTitle = document.getElementById('poemTitle').value.trim();
             const poemText = document.getElementById('poemText').value.trim();
+            const poemCode = document.getElementById('poemCode').value.trim();
 
-            const newPoem = { name: poetName, title: poemTitle, text: poemText };
+            const newPoem = { name: poetName, title: poemTitle, text: poemText, code: poemCode };
             poemList.push(newPoem);
             localStorage.setItem('poems', JSON.stringify(poemList));
 
@@ -131,9 +133,14 @@
         }
 
         function deletePoem(index) {
-            poemList.splice(index, 1);
-            localStorage.setItem('poems', JSON.stringify(poemList));
-            displayPoems();
+            const enteredCode = prompt('Enter the secret code for this poem:');
+            if (enteredCode === poemList[index].code) {
+                poemList.splice(index, 1);
+                localStorage.setItem('poems', JSON.stringify(poemList));
+                displayPoems();
+            } else {
+                alert('Incorrect code. You cannot delete this poem.');
+            }
         }
 
         document.getElementById('poemForm').addEventListener('submit', submitPoem);
